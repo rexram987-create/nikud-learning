@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {watchInstall} from '../src/offline.js';
+test('failed initial download reports incomplete but failed update keeps active readiness',()=>{let listener;const worker={state:'installing',addEventListener(_t,fn){listener=fn;}};let failed=0;watchInstall(worker,false,()=>failed++);worker.state='redundant';listener();assert.equal(failed,1);watchInstall(worker,true,()=>failed++);listener();assert.equal(failed,1);});
