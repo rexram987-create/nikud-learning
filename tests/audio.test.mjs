@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {playExample} from '../src/audio.js';
+test('no recording and no Hebrew voice reports unavailable',async()=>assert.deepEqual(await playExample('missing','שלום',{manifest:{},synth:null}),{mode:'unavailable'}));
+test('recording failure uses explicitly marked tts',async()=>{const synth={getVoices:()=>[{lang:'he-IL'}],cancel(){},speak(){}};class U{};class A{play(){return Promise.reject(Error());}pause(){}};assert.deepEqual(await playExample('x','שלום',{manifest:{x:'/bad.mp3'},synth,Utterance:U,AudioClass:A}),{mode:'tts'});});
