@@ -1,0 +1,2 @@
+export function loadProgress(storage){try{storage??=globalThis.localStorage;const p=JSON.parse(storage.getItem('nikud-progress'));if(Number.isInteger(p?.correct)&&Number.isInteger(p?.total)&&p.correct>=0&&p.total>=p.correct)return p;}catch{}return {correct:0,total:0};}
+export function saveProgress(p,storage){try{storage??=globalThis.localStorage;storage.setItem('nikud-progress',JSON.stringify(p));return true;}catch{return false;}}
