@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+test('install assets exist and cache does not erase progress',()=>{const m=JSON.parse(fs.readFileSync('manifest.webmanifest'));for(const n of [192,512])assert(m.icons.some(i=>i.sizes===`${n}x${n}`&&fs.existsSync('.'+i.src)));const sw=fs.readFileSync('sw.js','utf8');assert(sw.includes('/src/app.js'));assert(!sw.includes('localStorage'));assert(sw.includes('OFFLINE_READY'));});
