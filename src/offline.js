@@ -1,0 +1,1 @@
+export function watchInstall(worker,hasActive,onFailure){if(!worker)return;const check=()=>{if(worker.state==='redundant'&&!hasActive)onFailure();};worker.addEventListener('statechange',check);check();}
